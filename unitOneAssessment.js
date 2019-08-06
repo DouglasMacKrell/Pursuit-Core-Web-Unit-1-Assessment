@@ -42,7 +42,7 @@ const disemvowel = (str) => {
   // str = str.toLowerCase()
   str = str.split("")
   console.log(str)
-  for (let i = 0; i < str.length; i++) {
+  for (let i = str.length; i > -1 ; i--) {
     console.log(str[i])
     if (str[i] === "a") {
       console.log("gotcha")
