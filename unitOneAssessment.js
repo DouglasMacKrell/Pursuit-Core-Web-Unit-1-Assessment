@@ -2,39 +2,160 @@ let assert = require('assert')
 
 // Question One:
 
+const isOdd = (num) => {
+  num = parseInt(num)
+  if (typeof num === "number" && num > 0){
+    if (num % 2 === 1) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+}
+
 // Write a function called isOdd that returns whether or not a number is odd.
 // If something that is not a number is passed in, return false.
 
 
 // Uncomment out the next line to test your solution
-// runQ1Tests()
+runQ1Tests()
 
 
 // Question Two:
 
 // Write a function called numberOfDigits that returns how many digits are in a given number
 
+const numberOfDigits = (num) => {
+  num = num.toString()
+  return num.length
+  console.log(num.length)
+}
+
 // Uncomment out the next line to test your solution
-// runQ2Tests()
+runQ2Tests()
 
 // Question Three:
+
+const disemvowel = (str) => {
+  // str = str.toLowerCase()
+  str = str.split("")
+  console.log(str)
+  for (let i = 0; i < str.length; i++) {
+    console.log(str[i])
+    if (str[i] === "a") {
+      console.log("gotcha")
+      str.splice(i, 1)
+    } else if (str[i] === "e") {
+      console.log("gotcha")
+      str.splice(i, 1)
+    } else if (str[i] === "i") {
+      console.log("gotcha")
+      str.splice(i, 1)
+    } else if (str[i] === "o") {
+      console.log("gotcha")
+      str.splice(i, 1)
+    } else if (str[i] === "u") {
+      console.log("gotcha")
+      str.splice(i, 1)
+    } else {
+    }
+    console.log(str)
+  }
+  str = str.join("")
+  return str
+  console.log(str)
+}
+
+// currently this code is skipping an iteration of the loop every time
+// it finds an instance of a vowel and splices it out. I don't know why.
+// I'm out of time, but I would try to loop the arr again after each
+// vowel was checked to see if that would solve the problem. Maybe a
+// .forEach method would keep the loop from skipping?
+
 
 // Write a function called disemvowel that removes all of the vowels from a string.
 // Treat y as a consonant, not a vowel
 
 // Uncomment out the next line to test your solution
-// runQ3Tests()
+runQ3Tests()
 
 // Question Four:
+
+// const secondSmallest = (arr) => {
+//   let smallWonder = 0
+//   let smallCheck = arr.reduce((currEl, acc) => {
+//     console.log("acc " + acc)
+//     console.log("currEl " + currEl)
+//     if (acc < currEl) {
+//       smallWonder = currEl
+//       console.log(smallWonder)
+//       console.log(acc)
+//       if (smallWonder > currEl && smallWonder <= acc) {
+//         smallWonder = currEl
+//       }
+//     }
+//   })
+//   console.log(smallWonder)
+// }
+
+const secondSmallest = (arr) => {
+  let smallWonder = Infinity
+  let smallestWonder = Infinity
+  let smallCheck = arr.forEach((currEl) => {
+    console.log(currEl)
+    if (currEl < smallestWonder) {
+      smallestWonder = currEl
+      console.log("SmallWonder " + smallWonder)
+    } else if (currEl < smallWonder && smallWonder > smallestWonder) {
+      smallWonder = currEl
+      console.log("smallestWonder " + smallestWonder)
+    }
+  })
+  return smallWonder
+}
+
+// This does well until the numbers ratched back up again, then the
+// code breaks. I'm too manyt layers deep in the logic and this seems
+// overcomplicated for what it needs to do. If I had more time, I would
+// try this again with a .filter - but my understanding of .filter
+// is shakey - especially when you have extra logic steps to find
+// what you're looking for.
+
 // Write a function called secondSmallest that returns the second smallest number in an array
 
 // Uncomment out the next line to test your solution
-// runQ4Tests()
+runQ4Tests()
 
 // Question Five:
 // Write a function called getLocations that takes in an array of objects that look like the array below,
 // and returns an array of the strings corresponding to the value of the location property
 // The output should be in the same order as the input
+
+
+
+const getLocations = (arr) => {
+  let newLocations = []
+  let locations = []
+  for (let key of arr) {
+    for (let value in key) {
+    locations.push(key[value])
+    console.log("locations " + locations)
+    console.log("key[value] " + key[value])
+  }
+}
+let locationScan = locations.forEach((currEl) => {
+
+  console.log(currEl)
+  if (typeof currEl === "string") {
+    console.log("gotcha")
+    newLocations.push(currEl)
+  }
+})
+console.log(newLocations)
+return newLocations
+}
 
 // Sample input:
 // [{location: "Algeria", population: 41}, {location: "Belize", population: 0.4}, {location: "China", population: 1386}, {location: "Denmark", population: 6}]
@@ -43,19 +164,54 @@ let assert = require('assert')
 // ["Algeria", "Belize", "China", "Denmark"]
 
 // Uncomment out the next line to test your solution
-// runQ5Tests()
+runQ5Tests()
 
 
 // Question Six:
+
+const onlyOddStrings = (arr) => {
+  let oddHolder = []
+  let oddSearch = arr.filter(function(currEl) {
+    console.log(currEl)
+    if (currEl.length % 2 === 1) {
+      oddHolder.push(currEl)
+    }
+  })
+  return oddHolder
+}
+
 
 // Write a function called onlyOddStrings that takes in an array of strings as input and returns an array that only includes strings with an odd number of characters
 // Your function should use a higher-ordered function (e.g map, filter, reduce, every, sort) in its implementation
 
 // Uncomment out the next line to test your solution
-// runQ6Tests()
+runQ6Tests()
 
 
 // Question Seven:
+
+class Day {
+  constructor(temperature, weather) {
+    this.temperature = temperature,
+    this.weather = weather
+  }
+  getDescription() {
+    return `It is ${ this.temperature } degrees and ${ this.weather }`
+  }
+}
+
+let jar = []
+
+const getAllDayDescriptions = (arr) => {
+  let collector = arr.map((currEl) => {
+    return currEl.getDescription()
+  })
+  return collector
+}
+
+let weds = new Day(13, "sunny")
+
+console.log(weds)
 
 // a.
 // Make a class called Day
@@ -71,7 +227,7 @@ let assert = require('assert')
 // The output should be in the same order as the input
 
 // Uncomment out the next line to test your solution
-// runQ7Tests()
+runQ7Tests()
 
 
 
